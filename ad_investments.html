@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AD Investments — Create Your Financial Future</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --gold: #C9A84C;
+      --gold-light: #E2C47A;
+      --gold-dim: rgba(201,168,76,0.15);
+      --charcoal: #141414;
+      --charcoal-2: #1C1C1C;
+      --charcoal-3: #242424;
+      --white: #F5F2EC;
+      --white-dim: rgba(245,242,236,0.6);
+      --white-faint: rgba(245,242,236,0.08);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--charcoal);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* Custom cursor */
+    .cursor {
+      position: fixed;
+      width: 10px; height: 10px;
+      background: var(--gold);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s ease;
+    }
+    .cursor-follower {
+      position: fixed;
+      width: 36px; height: 36px;
+      border: 1px solid rgba(201,168,76,0.4);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: all 0.15s ease;
+    }
+
+    /* Noise overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.4;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 60px;
+      background: linear-gradient(180deg, rgba(20,20,20,0.95) 0%, transparent 100%);
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-logo img {
+      height: 52px;
+      width: auto;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      list-style: none;
+    }
+
+    /* Dropdown */
+    .nav-links li { position: relative; }
+
+    .dropdown {
+      position: absolute;
+      top: calc(100% + 16px);
+      left: 50%;
+      background: rgba(20,20,20,0.98);
+      border: 1px solid rgba(201,168,76,0.2);
+      backdrop-filter: blur(20px);
+      min-width: 220px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(-50%) translateY(-8px);
+      transition: all 0.3s ease;
+      z-index: 200;
+    }
+
+    .nav-links li:hover .dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .dropdown-section {
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(201,168,76,0.1);
+    }
+
+    .dropdown-section:last-child { border-bottom: none; }
+
+    .dropdown-label {
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      padding: 8px 20px 4px;
+      display: block;
+    }
+
+    .dropdown a {
+      display: block;
+      padding: 8px 20px;
+      font-size: 13px;
+      color: var(--white-dim) !important;
+      text-decoration: none;
+      letter-spacing: 0.03em !important;
+      text-transform: none !important;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .dropdown a:hover {
+      color: var(--gold) !important;
+      padding-left: 26px;
+      background: rgba(201,168,76,0.05);
+    }
+
+    .nav-links > li > a.has-dropdown::after {
+      content: ' ▾';
+      font-size: 10px;
+    }
+
+    .nav-links a {
+      color: var(--white-dim);
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--gold); }
+
+    .nav-cta {
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      padding: 10px 28px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: none;
+      transition: all 0.3s;
+      text-decoration: none;
+    }
+
+    .nav-cta:hover {
+      background: var(--gold);
+      color: var(--charcoal);
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      padding: 0 60px;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 70% 50%, rgba(201,168,76,0.06) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 20% 80%, rgba(201,168,76,0.04) 0%, transparent 60%);
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+      background-size: 80px 80px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+    }
+
+    .hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 32px;
+      animation: fadeUp 0.8s ease 0.2s both;
+    }
+
+    .hero-eyebrow span {
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      width: 40px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(52px, 7vw, 90px);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 28px;
+      animation: fadeUp 0.8s ease 0.4s both;
+    }
+
+    h1 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .hero-sub {
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--white-dim);
+      max-width: 480px;
+      margin-bottom: 48px;
+      animation: fadeUp 0.8s ease 0.6s both;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      animation: fadeUp 0.8s ease 0.8s both;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--charcoal);
+      padding: 16px 40px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: none;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,0.2);
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+    }
+
+    .btn-primary:hover::after { transform: translateX(0); }
+
+    .btn-secondary {
+      color: var(--white-dim);
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.3s;
+    }
+
+    .btn-secondary:hover { color: var(--gold); }
+
+    .btn-secondary svg { transition: transform 0.3s; }
+    .btn-secondary:hover svg { transform: translateX(4px); }
+
+    /* Floating stat cards */
+    .hero-stats {
+      position: absolute;
+      right: 60px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      animation: fadeLeft 0.8s ease 1s both;
+    }
+
+    .stat-card {
+      background: var(--white-faint);
+      border: 1px solid rgba(201,168,76,0.15);
+      backdrop-filter: blur(20px);
+      padding: 24px 32px;
+      min-width: 200px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px; height: 100%;
+      background: var(--gold);
+    }
+
+    .stat-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 42px;
+      font-weight: 600;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--white-dim);
+    }
+
+    /* MARQUEE */
+    .marquee-wrap {
+      border-top: 1px solid rgba(201,168,76,0.1);
+      border-bottom: 1px solid rgba(201,168,76,0.1);
+      padding: 18px 0;
+      overflow: hidden;
+      background: var(--charcoal-2);
+    }
+
+    .marquee-track {
+      display: flex;
+      gap: 60px;
+      width: max-content;
+      animation: marquee 25s linear infinite;
+    }
+
+    .marquee-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--white-dim);
+      white-space: nowrap;
+    }
+
+    .marquee-item span {
+      color: var(--gold);
+      font-size: 18px;
+    }
+
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* SERVICES */
+    .section {
+      padding: 120px 60px;
+      position: relative;
+    }
+
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .section-label span {
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .section-label::before {
+      content: '';
+      width: 40px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px, 5vw, 60px);
+      font-weight: 300;
+      line-height: 1.1;
+      margin-bottom: 60px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+    }
+
+    .service-card {
+      background: var(--charcoal-2);
+      padding: 48px;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.4s;
+      cursor: none;
+    }
+
+    .service-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 100%; height: 2px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+
+    .service-card:hover { background: var(--charcoal-3); }
+    .service-card:hover::after { transform: scaleX(1); }
+
+    .service-icon {
+      width: 48px; height: 48px;
+      border: 1px solid rgba(201,168,76,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 28px;
+      font-size: 20px;
+    }
+
+    .service-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 400;
+      margin-bottom: 16px;
+    }
+
+    .service-desc {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--white-dim);
+    }
+
+    .service-arrow {
+      position: absolute;
+      bottom: 48px; right: 48px;
+      color: var(--gold);
+      opacity: 0;
+      transform: translateX(-10px);
+      transition: all 0.3s;
+      font-size: 20px;
+    }
+
+    .service-card:hover .service-arrow {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* WHY US */
+    .why-section {
+      background: var(--charcoal-2);
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .why-left h2 { margin-bottom: 24px; }
+
+    .why-left p {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--white-dim);
+      margin-bottom: 40px;
+    }
+
+    .why-points {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .why-point {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    .why-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13px;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+      min-width: 28px;
+      padding-top: 2px;
+    }
+
+    .why-text strong {
+      display: block;
+      font-size: 15px;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .why-text span {
+      font-size: 13px;
+      color: var(--white-dim);
+      line-height: 1.6;
+    }
+
+    .why-right {
+      position: relative;
+    }
+
+    .why-visual {
+      background: var(--charcoal-3);
+      border: 1px solid rgba(201,168,76,0.1);
+      padding: 48px;
+      position: relative;
+    }
+
+    .why-visual::before {
+      content: '"';
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 120px;
+      color: var(--gold);
+      opacity: 0.15;
+      position: absolute;
+      top: -20px; left: 32px;
+      line-height: 1;
+    }
+
+    .testimonial-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 300;
+      line-height: 1.5;
+      font-style: italic;
+      margin-bottom: 32px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .author-avatar {
+      width: 44px; height: 44px;
+      background: var(--gold-dim);
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      color: var(--gold);
+    }
+
+    .author-name {
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .author-role {
+      font-size: 12px;
+      color: var(--white-dim);
+      letter-spacing: 0.05em;
+    }
+
+    /* CONTACT */
+    .contact-section {
+      background: var(--charcoal);
+    }
+
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .contact-left h2 { margin-bottom: 20px; }
+
+    .contact-left p {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--white-dim);
+      margin-bottom: 48px;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .contact-item {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .contact-icon {
+      width: 44px; height: 44px;
+      border: 1px solid rgba(201,168,76,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .contact-detail strong {
+      display: block;
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 4px;
+    }
+
+    .contact-detail span {
+      font-size: 15px;
+      color: var(--white);
+    }
+
+    .contact-right {
+      background: var(--charcoal-2);
+      border: 1px solid rgba(201,168,76,0.1);
+      padding: 48px;
+    }
+
+    .contact-right h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 400;
+      margin-bottom: 32px;
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      background: var(--white-faint);
+      border: 1px solid rgba(201,168,76,0.15);
+      color: var(--white);
+      padding: 14px 18px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.3s;
+      cursor: none;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--gold);
+    }
+
+    .form-group select option { background: var(--charcoal-2); }
+
+    .form-group textarea { resize: none; height: 100px; }
+
+    .form-submit {
+      width: 100%;
+      background: var(--gold);
+      color: var(--charcoal);
+      border: none;
+      padding: 16px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: none;
+      transition: opacity 0.3s;
+      margin-top: 8px;
+    }
+
+    .form-submit:hover { opacity: 0.85; }
+
+    /* FOOTER */
+    footer {
+      background: #0E0E0E;
+      border-top: 1px solid rgba(201,168,76,0.1);
+      padding: 48px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .footer-logo img { height: 36px; }
+
+    .footer-tagline {
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      color: var(--white-dim);
+      text-transform: uppercase;
+    }
+
+    .footer-copy {
+      font-size: 12px;
+      color: rgba(245,242,236,0.3);
+      letter-spacing: 0.05em;
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeLeft {
+      from { opacity: 0; transform: translate(30px, -50%); }
+      to { opacity: 1; transform: translate(0, -50%); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* MOBILE */
+    @media (max-width: 768px) {
+      /* cursor off on touch */
+      .cursor, .cursor-follower { display: none; }
+      body { cursor: auto; }
+      a, button { cursor: pointer; }
+
+      /* nav */
+      nav { padding: 16px 20px; }
+      .nav-links { display: none; }
+      .nav-cta { padding: 8px 18px; font-size: 11px; }
+
+      /* hero */
+      .hero {
+        padding: 100px 20px 60px;
+        min-height: 100vh;
+        align-items: flex-start;
+      }
+      .hero-stats { display: none; }
+      h1 { font-size: 42px; }
+      .hero-sub { font-size: 14px; }
+      .hero-actions { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .btn-primary { width: 100%; text-align: center; padding: 14px 24px; }
+
+      /* marquee */
+      .marquee-item { font-size: 11px; }
+
+      /* sections */
+      .section { padding: 60px 20px; }
+      h2 { font-size: 32px; }
+
+      /* services */
+      .services-grid { grid-template-columns: 1fr !important; gap: 2px; }
+      .service-card { padding: 32px 24px; }
+      .service-title { font-size: 22px; }
+
+      /* why */
+      .why-grid { grid-template-columns: 1fr; gap: 40px; }
+      .why-visual { padding: 28px 24px; }
+      .testimonial-text { font-size: 18px; }
+
+      /* contact */
+      .contact-inner { grid-template-columns: 1fr; gap: 40px; }
+      .contact-right { padding: 28px 20px; }
+      .contact-info { gap: 16px; }
+
+      /* footer */
+      footer { padding: 40px 20px 0 !important; }
+      .footer-grid { grid-template-columns: 1fr 1fr !important; gap: 24px !important; }
+    }
+
+    @media (max-width: 480px) {
+      .footer-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+    }
+
+    @media (max-width: 400px) {
+      h1 { font-size: 34px; }
+      .service-card { padding: 24px 16px; }
+      .contact-right { padding: 20px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-follower" id="follower"></div>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">
+      <img src="https://i.ibb.co/N2tqmM7z/ad-investments-logo.png" alt="AD Investments"/>
+    </div>
+
+    <ul class="nav-links">
+      <li>
+        <a href="#services" class="has-dropdown">Services</a>
+        <div class="dropdown">
+          <div class="dropdown-section">
+            <span class="dropdown-label">Investments</span>
+            <a href="mutual-funds.html">Mutual Funds</a>
+            <a href="fixed-deposits.html">Fixed Deposits</a>
+            <a href="demat.html">Demat Services</a>
+            <a href="bonds.html">NCD/RBI Bonds</a>
+            <a href="sgb.html">Sovereign Gold Bond</a>
+            <a href="capital-gains.html">Capital Gain Bonds (54EC)</a>
+            <a href="nps.html">NPS</a>
+          </div>
+          <div class="dropdown-section">
+            <span class="dropdown-label">Insurance</span>
+            <a href="life-insurance.html">Life Insurance</a>
+            <a href="health-insurance.html">Health Insurance</a>
+            <a href="motor-insurance.html">Motor Insurance</a>
+          </div>
+          <div class="dropdown-section">
+            <span class="dropdown-label">Loans</span>
+            <a href="home-loan.html">Home Loan</a>
+            <a href="auto-loan.html">Auto Loan</a>
+            <a href="personal-loan.html">Personal Loan</a>
+            <a href="loan-mf-lic.html">Loan on MF/LIC</a>
+          </div>
+          <div class="dropdown-section">
+            <span class="dropdown-label">Planning</span>
+            <a href="retirement.html">Retirement Planning</a>
+            <a href="stock-advisory.html">Stock Advisory</a>
+          </div>
+          <div class="dropdown-section">
+            <span class="dropdown-label">Banking</span>
+            <a href="hdfc-savings.html">HDFC Bank Saving A/c</a>
+            <a href="hdfc-credit.html">HDFC Credit Card</a>
+          </div>
+        </div>
+      </li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Book Consultation</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <span>Lucknow's Trusted Financial Partner</span>
+      </div>
+      <h1>Create Your <em>Financial</em> Future With Us</h1>
+      <p class="hero-sub">Expert guidance in stock advisory and mutual funds — helping families in Lucknow build lasting wealth through disciplined, personalised investing.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Start Investing</a>
+        <a href="#services" class="btn-secondary">
+          Our Services
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-card">
+        <div class="stat-number">50+</div>
+        <div class="stat-label">Happy Clients</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">17+</div>
+        <div class="stat-label">Financial Services</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">2+</div>
+        <div class="stat-label">Years of Service</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <div class="marquee-item"><span>◆</span> Stock Advisory</div>
+      <div class="marquee-item"><span>◆</span> Mutual Funds</div>
+      <div class="marquee-item"><span>◆</span> Wealth Planning</div>
+      <div class="marquee-item"><span>◆</span> Portfolio Management</div>
+      <div class="marquee-item"><span>◆</span> SIP Advisory</div>
+      <div class="marquee-item"><span>◆</span> Market Research</div>
+      <div class="marquee-item"><span>◆</span> Stock Advisory</div>
+      <div class="marquee-item"><span>◆</span> Mutual Funds</div>
+      <div class="marquee-item"><span>◆</span> Wealth Planning</div>
+      <div class="marquee-item"><span>◆</span> Portfolio Management</div>
+      <div class="marquee-item"><span>◆</span> SIP Advisory</div>
+      <div class="marquee-item"><span>◆</span> Market Research</div>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <section class="section" id="services">
+    <div class="section-label reveal">
+      <span>What We Offer</span>
+    </div>
+    <h2 class="reveal">Services Built For <em style="font-style:italic;color:var(--gold)">Your</em> Goals</h2>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <div class="service-icon">📈</div>
+        <div class="service-title">Stock Advisory</div>
+        <p class="service-desc">Research-backed stock recommendations tailored to your risk appetite. We analyse fundamentals, technicals, and market trends so you don't have to.</p>
+        <div class="service-arrow">→</div>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">💼</div>
+        <div class="service-title">Mutual Funds</div>
+        <p class="service-desc">SIP or lump sum — we help you pick the right funds across equity, debt, and hybrid categories to match your financial timeline.</p>
+        <div class="service-arrow">→</div>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">🏦</div>
+        <div class="service-title">Fixed Deposits</div>
+        <p class="service-desc">Safe and guaranteed returns with corporate and bank fixed deposits tailored to your investment horizon.</p>
+        <div class="service-arrow">→</div>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">📊</div>
+        <div class="service-title">Demat Services</div>
+        <p class="service-desc">Open and manage your Demat account seamlessly. Start investing in stocks and securities with expert guidance.</p>
+        <div class="service-arrow">→</div>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">🎯</div>
+        <div class="service-title">Retirement Planning</div>
+        <p class="service-desc">Build a secure retirement corpus with NPS, mutual funds, and systematic investment strategies designed for the long term.</p>
+        <div class="service-arrow">→</div>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">🏠</div>
+        <div class="service-title">Home Loan</div>
+        <p class="service-desc">Get the best home loan deals from top banks and NBFCs. We compare rates and help you through the entire process.</p>
+        <div class="service-arrow">→</div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:40px;" class="reveal">
+      <p style="color:var(--white-dim);font-size:14px;margin-bottom:16px;">And 11 more services including Insurance, Loans, Bonds & Banking</p>
+      <a href="#" class="nav-cta" style="display:inline-block;text-decoration:none;">View All Services ↓</a>
+    </div>
+  </section>
+
+  <!-- WHY US -->
+  <section class="section why-section" id="why">
+    <div class="why-grid">
+      <div class="why-left reveal">
+        <div class="section-label">
+          <span>Why AD Investments</span>
+        </div>
+        <h2>Trusted by Families <em style="font-style:italic;color:var(--gold)">Across Lucknow</em></h2>
+        <p>We're not a faceless corporation. We're a local firm that understands the aspirations of Lucknow's salaried families — and we've been guiding them for over a decade.</p>
+        <div class="why-points">
+          <div class="why-point">
+            <div class="why-num">01</div>
+            <div class="why-text">
+              <strong>Personalised Advice</strong>
+              <span>No generic recommendations. Every plan is built around your specific income, goals, and risk tolerance.</span>
+            </div>
+          </div>
+          <div class="why-point">
+            <div class="why-num">02</div>
+            <div class="why-text">
+              <strong>Transparent Process</strong>
+              <span>You always know where your money is, how it's performing, and what we're doing with it.</span>
+            </div>
+          </div>
+          <div class="why-point">
+            <div class="why-num">03</div>
+            <div class="why-text">
+              <strong>Long Term Relationship</strong>
+              <span>We grow with you — from your first SIP to building a multi-crore portfolio over decades.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="why-right reveal">
+        <div class="why-visual">
+          <p class="testimonial-text">"AD Investments helped me start my first SIP 6 years ago. Today my portfolio has grown beyond what I ever imagined. They feel like family."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">R</div>
+            <div>
+              <div class="author-name">Rahul Srivastava</div>
+              <div class="author-role">Government Employee, Lucknow</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section contact-section" id="contact">
+    <div class="contact-inner">
+      <div class="contact-left reveal">
+        <div class="section-label">
+          <span>Get In Touch</span>
+        </div>
+        <h2>Book a Free <em style="font-style:italic;color:var(--gold)">Consultation</em></h2>
+        <p>Talk to us for free. No commitments. We'll review your financial situation and show you exactly how to grow your wealth — step by step.</p>
+        <div class="contact-info">
+          <div class="contact-item">
+            <div class="contact-icon">📞</div>
+            <div class="contact-detail">
+              <strong>Call Us</strong>
+              <span>+91 73790 08786</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">💬</div>
+            <div class="contact-detail">
+              <strong>WhatsApp</strong>
+              <span>Message us anytime</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📍</div>
+            <div class="contact-detail">
+              <strong>Location</strong>
+              <span>Lucknow, Uttar Pradesh</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-right reveal">
+        <h3>Request a Callback</h3>
+        <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/success.html">
+          <input type="hidden" name="form-name" value="contact"/>
+          <input type="hidden" name="bot-field" style="display:none"/>
+          <div class="form-group">
+            <label>Your Name</label>
+            <input type="text" name="name" placeholder="Amit Kumar" required/>
+          </div>
+          <div class="form-group">
+            <label>Phone Number</label>
+            <input type="tel" name="phone" placeholder="+91 98765 43210" required/>
+          </div>
+          <div class="form-group">
+            <label>Interested In</label>
+            <select name="interest">
+              <option>Stock Advisory</option>
+              <option>Mutual Funds</option>
+              <option>Portfolio Review</option>
+              <option>Goal-Based Planning</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Message (Optional)</label>
+            <textarea name="message" placeholder="Tell us briefly about your financial goals..."></textarea>
+          </div>
+          <button type="submit" class="form-submit">Request Free Consultation</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="background:#0E0E0E;border-top:1px solid rgba(201,168,76,0.15);padding:60px 24px 0;">
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:40px;padding-bottom:48px;" class="footer-grid">
+      <div>
+        <img src="https://i.ibb.co/N2tqmM7z/ad-investments-logo.png" alt="AD Investments" style="height:48px;margin-bottom:16px;display:block;"/>
+        <h4 style="font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:400;color:var(--white);margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid var(--gold);display:inline-block;">About Us</h4>
+        <p style="font-size:13px;line-height:1.8;color:var(--white-dim);margin-top:12px;">AD Investments is a fully dedicated Financial Distribution Company based in Lucknow. Our purpose is to help investors preserve and grow their wealth through disciplined, goal-based financial planning.</p>
+      </div>
+      <div>
+        <h4 style="font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:400;color:var(--white);margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid var(--gold);display:inline-block;">Quick Links</h4>
+        <ul style="list-style:none;margin-top:12px;display:flex;flex-direction:column;gap:10px;">
+          <li><a href="#" style="color:var(--white-dim);text-decoration:none;font-size:13px;" onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='rgba(245,242,236,0.6)'">● Home</a></li>
+          <li><a href="#services" style="color:var(--white-dim);text-decoration:none;font-size:13px;" onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='rgba(245,242,236,0.6)'">● Services</a></li>
+          <li><a href="#why" style="color:var(--white-dim);text-decoration:none;font-size:13px;" onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='rgba(245,242,236,0.6)'">● About Us</a></li>
+          <li><a href="#contact" style="color:var(--white-dim);text-decoration:none;font-size:13px;" onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='rgba(245,242,236,0.6)'">● Contact</a></li>
+          <li><a href="#contact" style="color:var(--white-dim);text-decoration:none;font-size:13px;" onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='rgba(245,242,236,0.6)'">● Book Consultation</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 style="font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:400;color:var(--white);margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid var(--gold);display:inline-block;">Our Services</h4>
+        <ul style="list-style:none;margin-top:12px;display:flex;flex-direction:column;gap:10px;">
+          <li><a href="mutual-funds.html" style="color:var(--white-dim);text-decoration:none;font-size:13px;" onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='rgba(245,242,236,0.6)'">● Mutual Funds</a></li>
+          <li><a href="life-insurance.html" style="color:var(--white-dim);text-decoration:none;font-size:13px;" onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='rgba(245,242,236,0.6)'">● Life Insurance</a></li>
+          <li><a href="health-insurance.html" style="color:var(--white-dim);text-decoration:none;font-size:13px;" onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='rgba(245,242,236,0.6)'">● Health Insurance</a></li>
+          <li><a href="fixed-deposits.html" style="color:var(--white-dim);text-decoration:none;font-size:13px;" onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='rgba(245,242,236,0.6)'">● Fixed Deposits</a></li>
+          <li><a href="retirement.html" style="color:var(--white-dim);text-decoration:none;font-size:13px;" onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='rgba(245,242,236,0.6)'">● Retirement Planning</a></li>
+          <li><a href="home-loan.html" style="color:var(--white-dim);text-decoration:none;font-size:13px;" onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='rgba(245,242,236,0.6)'">● Home Loan</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 style="font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:400;color:var(--white);margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid var(--gold);display:inline-block;">Get In Touch</h4>
+        <ul style="list-style:none;margin-top:12px;display:flex;flex-direction:column;gap:14px;">
+          <li style="display:flex;gap:10px;align-items:flex-start;"><span style="color:var(--gold);">📍</span><span style="font-size:13px;color:var(--white-dim);line-height:1.6;">Lucknow, Uttar Pradesh, India</span></li>
+          <li style="display:flex;gap:10px;align-items:center;"><span style="color:var(--gold);">✉️</span><a href="/cdn-cgi/l/email-protection#afcecbc6c1d9cadcdbc2cac1dbc3c4c0efc8c2cec6c381ccc0c2" style="font-size:13px;color:var(--white-dim);text-decoration:none;" onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='rgba(245,242,236,0.6)'"><span class="__cf_email__" data-cfemail="69080d00071f0c1a1d040c071d050206290e04080005470a0604">[email&#160;protected]</span></a></li>
+          <li style="display:flex;gap:10px;align-items:center;"><span style="color:var(--gold);">📞</span><a href="tel:+917379008786" style="font-size:13px;color:var(--white-dim);text-decoration:none;" onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='rgba(245,242,236,0.6)'">+91 73790 08786</a></li>
+          <li style="display:flex;gap:10px;align-items:center;"><span style="color:var(--gold);">💬</span><a href="https://wa.me/917379008786" target="_blank" style="font-size:13px;color:var(--white-dim);text-decoration:none;" onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='rgba(245,242,236,0.6)'">WhatsApp Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div style="border-top:1px solid rgba(201,168,76,0.1);padding:20px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+      <div style="font-size:12px;color:rgba(245,242,236,0.3);">© 2025 AD Investments. Lucknow, India. All rights reserved.</div>
+      <div style="font-size:12px;color:rgba(245,242,236,0.3);">AMFI Registered | ARN-131924 | Validity: 08 Sep 2026</div>
+    </div>
+  </footer>
+
+  <!-- SEBI DISCLAIMER -->
+  <div style="background:#0A0A0A;padding:24px 20px;font-size:11px;color:rgba(245,242,236,0.3);line-height:1.8;text-align:center;">
+    <p style="max-width:1000px;margin:0 auto 8px;"><strong style="color:rgba(201,168,76,0.5);">Risk Factors —</strong> Investments in Mutual Funds are subject to Market Risks. Read all scheme related documents carefully before investing. Mutual Fund Schemes do not assure or guarantee any returns. Past performances of any Mutual Fund Scheme may or may not be sustained in future. There is no guarantee that the investment objective of any suggested scheme shall be achieved. All existing and prospective investors are advised to check and evaluate the Exit loads and other cost structure (TER) applicable at the time of making the investment before finalizing on any investment decision for Mutual Funds schemes. We deal in Regular Plans only for Mutual Fund Schemes and earn a Trailing Commission on client investments. Disclosure for commission earnings is made to clients at the time of investments. Option of Direct Plan for every Mutual Fund Scheme is available to investors offering advantage of lower expense ratio. We are not entitled to earn any commission on Direct plans. Hence we do not deal in Direct Plans.</p>
+    <p style="margin-top:8px;">
+      <a href="https://www.sebi.gov.in" target="_blank" style="color:rgba(201,168,76,0.5);text-decoration:none;">SEBI</a> &nbsp;|&nbsp;
+      <a href="https://www.amfiindia.com" target="_blank" style="color:rgba(201,168,76,0.5);text-decoration:none;">AMFI</a> &nbsp;|&nbsp;
+      <a href="https://www.sebi.gov.in/filings/mutual-funds.html" target="_blank" style="color:rgba(201,168,76,0.5);text-decoration:none;">SID/SAI/KIM</a>
+    </p>
+  </div>
+
+  <script>
+    // Custom cursor
+    const cursor = document.getElementById('cursor');
+    const follower = document.getElementById('follower');
+    let fx = 0, fy = 0, cx = 0, cy = 0;
+
+    document.addEventListener('mousemove', e => {
+      cx = e.clientX; cy = e.clientY;
+      cursor.style.left = cx + 'px';
+      cursor.style.top = cy + 'px';
+    });
+
+    function animateFollower() {
+      fx += (cx - fx) * 0.12;
+      fy += (cy - fy) * 0.12;
+      follower.style.left = fx + 'px';
+      follower.style.top = fy + 'px';
+      requestAnimationFrame(animateFollower);
+    }
+    animateFollower();
+
+    // Scroll reveal — trigger immediately for visible elements
+    const reveals = document.querySelectorAll('.reveal');
+
+    function checkReveals() {
+      reveals.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 50) {
+          el.classList.add('visible');
+        }
+      });
+    }
+
+    // Run on load and scroll
+    window.addEventListener('scroll', checkReveals);
+    window.addEventListener('load', checkReveals);
+    document.addEventListener('DOMContentLoaded', checkReveals);
+    setTimeout(checkReveals, 100);
+    setTimeout(checkReveals, 500);
+  </script>
+</body>
+</html>

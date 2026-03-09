@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us — AD Investments</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --gold: #C9A84C;
+      --gold-light: #E2C47A;
+      --gold-dim: rgba(201,168,76,0.15);
+      --charcoal: #141414;
+      --charcoal-2: #1C1C1C;
+      --charcoal-3: #242424;
+      --white: #F5F2EC;
+      --white-dim: rgba(245,242,236,0.6);
+      --white-faint: rgba(245,242,236,0.08);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--charcoal);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 60px;
+      background: rgba(20,20,20,0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(201,168,76,0.1);
+    }
+
+    .nav-logo img { height: 48px; width: auto; }
+
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      list-style: none;
+      position: relative;
+    }
+
+    .nav-links li { position: relative; }
+
+    .nav-links a {
+      color: var(--white-dim);
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--gold); }
+
+    .nav-links > li > a.has-dropdown::after { content: ' ▾'; font-size: 10px; }
+
+    .dropdown {
+      position: absolute;
+      top: calc(100% + 16px);
+      left: 50%;
+      background: rgba(20,20,20,0.98);
+      border: 1px solid rgba(201,168,76,0.2);
+      backdrop-filter: blur(20px);
+      min-width: 220px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(-50%) translateY(-8px);
+      transition: all 0.3s ease;
+      z-index: 200;
+    }
+
+    .nav-links li:hover .dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .dropdown-section { padding: 8px 0; border-bottom: 1px solid rgba(201,168,76,0.1); }
+    .dropdown-section:last-child { border-bottom: none; }
+    .dropdown-label { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); padding: 8px 20px 4px; display: block; }
+    .dropdown a { display: block; padding: 8px 20px; font-size: 13px; color: var(--white-dim) !important; text-decoration: none; letter-spacing: 0.03em !important; text-transform: none !important; transition: all 0.2s; white-space: nowrap; }
+    .dropdown a:hover { color: var(--gold) !important; padding-left: 26px; background: rgba(201,168,76,0.05); }
+
+    .nav-cta {
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      padding: 10px 28px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: all 0.3s;
+      text-decoration: none;
+    }
+    .nav-cta:hover { background: var(--gold); color: var(--charcoal); }
+
+    /* PAGE HERO */
+    .page-hero {
+      padding: 140px 60px 80px;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(180deg, rgba(201,168,76,0.05) 0%, transparent 100%);
+      border-bottom: 1px solid rgba(201,168,76,0.1);
+    }
+
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+      background-size: 80px 80px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 100%);
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--white-dim);
+      margin-bottom: 24px;
+    }
+
+    .breadcrumb a { color: var(--gold); text-decoration: none; }
+    .breadcrumb span { color: var(--white-dim); }
+
+    .page-hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(42px, 6vw, 80px);
+      font-weight: 300;
+      line-height: 1.05;
+      max-width: 700px;
+    }
+
+    .page-hero h1 em { font-style: italic; color: var(--gold); }
+
+    .page-hero p {
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--white-dim);
+      max-width: 600px;
+      margin-top: 20px;
+    }
+
+    /* SECTION */
+    .section { padding: 100px 60px; }
+
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .section-label::before { content: ''; width: 40px; height: 1px; background: var(--gold); }
+    .section-label span { font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); }
+
+    h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(32px, 4vw, 56px);
+      font-weight: 300;
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+
+    h2 em { font-style: italic; color: var(--gold); }
+
+    /* WHO WE ARE */
+    .who-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .who-left p {
+      font-size: 15px;
+      line-height: 1.9;
+      color: var(--white-dim);
+      margin-bottom: 20px;
+    }
+
+    .who-right {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+    }
+
+    .stat-box {
+      background: var(--charcoal-2);
+      padding: 36px 28px;
+      position: relative;
+    }
+
+    .stat-box::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px; height: 100%;
+      background: var(--gold);
+    }
+
+    .stat-box-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 48px;
+      font-weight: 600;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat-box-label {
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--white-dim);
+    }
+
+    /* VISION MISSION */
+    .vm-section { background: var(--charcoal-2); }
+
+    .vm-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+    }
+
+    .vm-card {
+      background: var(--charcoal-3);
+      padding: 56px 48px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .vm-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 100%; height: 3px;
+      background: var(--gold);
+    }
+
+    .vm-icon {
+      font-size: 32px;
+      margin-bottom: 24px;
+      display: block;
+    }
+
+    .vm-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px;
+      font-weight: 400;
+      margin-bottom: 16px;
+      color: var(--gold);
+    }
+
+    .vm-text {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--white-dim);
+    }
+
+    /* VALUES */
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .value-card {
+      background: var(--charcoal-2);
+      border: 1px solid rgba(201,168,76,0.1);
+      padding: 36px 28px;
+      transition: border-color 0.3s;
+    }
+
+    .value-card:hover { border-color: var(--gold); }
+
+    .value-icon { font-size: 28px; margin-bottom: 16px; display: block; }
+
+    .value-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 400;
+      margin-bottom: 12px;
+    }
+
+    .value-text { font-size: 13px; line-height: 1.7; color: var(--white-dim); }
+
+    /* JOURNEY */
+    .journey-section { background: var(--charcoal-2); }
+
+    .timeline {
+      position: relative;
+      margin-top: 48px;
+      padding-left: 40px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 1px;
+      background: linear-gradient(180deg, var(--gold) 0%, transparent 100%);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 40px;
+      padding-left: 32px;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -44px; top: 6px;
+      width: 10px; height: 10px;
+      background: var(--gold);
+      border-radius: 50%;
+    }
+
+    .timeline-year {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+
+    .timeline-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 400;
+      margin-bottom: 8px;
+    }
+
+    .timeline-text { font-size: 14px; line-height: 1.7; color: var(--white-dim); }
+
+    /* TEAM */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+      max-width: 700px;
+    }
+
+    .team-card {
+      background: var(--charcoal-2);
+      border: 1px solid rgba(201,168,76,0.1);
+      padding: 36px 28px;
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    .team-avatar {
+      width: 56px; height: 56px;
+      background: var(--gold-dim);
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .team-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 400;
+      margin-bottom: 4px;
+    }
+
+    .team-role { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+    .team-bio { font-size: 13px; line-height: 1.7; color: var(--white-dim); }
+
+    /* CTA */
+    .cta-section {
+      text-align: center;
+      padding: 100px 60px;
+      background: linear-gradient(180deg, transparent 0%, rgba(201,168,76,0.05) 100%);
+      border-top: 1px solid rgba(201,168,76,0.1);
+    }
+
+    .cta-section h2 { margin-bottom: 16px; }
+    .cta-section p { color: var(--white-dim); font-size: 16px; margin-bottom: 40px; }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--charcoal);
+      padding: 16px 48px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      display: inline-block;
+      transition: opacity 0.3s;
+    }
+    .btn-primary:hover { opacity: 0.85; }
+
+    /* FOOTER */
+    footer { background: #0E0E0E; border-top: 1px solid rgba(201,168,76,0.15); padding: 60px 60px 0; }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
+      padding-bottom: 48px;
+    }
+
+    .footer-h { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 400; color: var(--white); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--gold); display: inline-block; }
+    .footer-p { font-size: 13px; line-height: 1.8; color: var(--white-dim); margin-top: 12px; }
+    .footer-ul { list-style: none; margin-top: 12px; display: flex; flex-direction: column; gap: 10px; }
+    .footer-ul a { color: var(--white-dim); text-decoration: none; font-size: 13px; transition: color 0.2s; }
+    .footer-ul a:hover { color: var(--gold); }
+    .footer-contact-item { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 14px; }
+    .footer-contact-item span:first-child { color: var(--gold); }
+    .footer-contact-item a { font-size: 13px; color: var(--white-dim); text-decoration: none; }
+    .footer-contact-item a:hover { color: var(--gold); }
+    .footer-bottom { border-top: 1px solid rgba(201,168,76,0.1); padding: 20px 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .footer-copy { font-size: 12px; color: rgba(245,242,236,0.3); }
+
+    .sebi-disclaimer { background: #0A0A0A; padding: 24px 60px; font-size: 11px; color: rgba(245,242,236,0.3); line-height: 1.8; text-align: center; }
+    .sebi-disclaimer a { color: rgba(201,168,76,0.5); text-decoration: none; }
+
+    /* MOBILE */
+    @media (max-width: 768px) {
+      nav { padding: 16px 20px; }
+      .nav-links { display: none; }
+      .page-hero { padding: 100px 20px 60px; }
+      .section { padding: 60px 20px; }
+      .who-grid { grid-template-columns: 1fr; gap: 40px; }
+      .who-right { grid-template-columns: 1fr 1fr; }
+      .vm-grid { grid-template-columns: 1fr; }
+      .vm-card { padding: 36px 24px; }
+      .values-grid { grid-template-columns: 1fr; }
+      .team-grid { grid-template-columns: 1fr; max-width: 100%; }
+      .cta-section { padding: 60px 20px; }
+      footer { padding: 40px 20px 0; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+      .sebi-disclaimer { padding: 24px 20px; }
+    }
+
+    @media (max-width: 480px) {
+      .footer-grid { grid-template-columns: 1fr; }
+      .who-right { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">
+      <a href="index.html"><img src="https://i.ibb.co/N2tqmM7z/ad-investments-logo.png" alt="AD Investments"/></a>
+    </div>
+    <ul class="nav-links">
+      <li>
+        <a href="index.html#services" class="has-dropdown">Services</a>
+        <div class="dropdown">
+          <div class="dropdown-section">
+            <span class="dropdown-label">Investments</span>
+            <a href="mutual-funds.html">Mutual Funds</a>
+            <a href="fixed-deposits.html">Fixed Deposits</a>
+            <a href="demat.html">Demat Services</a>
+            <a href="bonds.html">NCD/RBI Bonds</a>
+            <a href="sgb.html">Sovereign Gold Bond</a>
+            <a href="capital-gains.html">Capital Gain Bonds (54EC)</a>
+            <a href="nps.html">NPS</a>
+          </div>
+          <div class="dropdown-section">
+            <span class="dropdown-label">Insurance</span>
+            <a href="life-insurance.html">Life Insurance</a>
+            <a href="health-insurance.html">Health Insurance</a>
+            <a href="motor-insurance.html">Motor Insurance</a>
+          </div>
+          <div class="dropdown-section">
+            <span class="dropdown-label">Loans</span>
+            <a href="home-loan.html">Home Loan</a>
+            <a href="auto-loan.html">Auto Loan</a>
+            <a href="personal-loan.html">Personal Loan</a>
+            <a href="loan-mf-lic.html">Loan on MF/LIC</a>
+          </div>
+          <div class="dropdown-section">
+            <span class="dropdown-label">Planning</span>
+            <a href="retirement.html">Retirement Planning</a>
+            <a href="stock-advisory.html">Stock Advisory</a>
+          </div>
+          <div class="dropdown-section">
+            <span class="dropdown-label">Banking</span>
+            <a href="hdfc-savings.html">HDFC Bank Saving A/c</a>
+            <a href="hdfc-credit.html">HDFC Credit Card</a>
+          </div>
+        </div>
+      </li>
+      <li><a href="about.html" style="color:var(--gold)">About</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+    <a href="index.html#contact" class="nav-cta">Book Consultation</a>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <div class="page-hero">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span>→</span>
+      <span>About Us</span>
+    </div>
+    <h1>Building <em>Trust</em>, One Client at a Time</h1>
+    <p>We are a Lucknow-based financial distribution and advisory firm committed to helping families and individuals achieve their financial goals through honest, personalised, and expert guidance.</p>
+  </div>
+
+  <!-- WHO WE ARE -->
+  <section class="section">
+    <div class="who-grid">
+      <div class="who-left">
+        <div class="section-label"><span>Who We Are</span></div>
+        <h2>AD Investments — <em>Your Financial Partner</em></h2>
+        <p>AD Investments is a SEBI/AMFI registered financial distribution firm based in Lucknow, Uttar Pradesh. We work with salaried individuals, business owners, and families to help them navigate the complex world of financial products — from mutual funds and insurance to loans and bonds.</p>
+        <p>We believe that every person, regardless of income level, deserves access to quality financial advice. Our approach is simple — understand your goals, build a plan, and walk with you every step of the way.</p>
+        <p>With over 17 financial services under one roof and a growing client base of 50+ satisfied investors, AD Investments is becoming Lucknow's most trusted financial partner.</p>
+      </div>
+      <div class="who-right">
+        <div class="stat-box">
+          <div class="stat-box-number">50+</div>
+          <div class="stat-box-label">Happy Clients</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-box-number">17+</div>
+          <div class="stat-box-label">Financial Services</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-box-number">2+</div>
+          <div class="stat-box-label">Years of Service</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-box-number">ARN</div>
+          <div class="stat-box-label">131924 — AMFI Registered</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VISION & MISSION -->
+  <section class="section vm-section">
+    <div style="max-width:800px;margin:0 auto 48px;">
+      <div class="section-label"><span>Our Purpose</span></div>
+      <h2>Vision & <em>Mission</em></h2>
+    </div>
+    <div class="vm-grid">
+      <div class="vm-card">
+        <span class="vm-icon">🔭</span>
+        <div class="vm-title">Our Vision</div>
+        <p class="vm-text">To be Lucknow's most trusted financial distribution firm — empowering every family to achieve financial independence through disciplined investing, comprehensive protection, and goal-based planning.</p>
+        <p class="vm-text" style="margin-top:16px;">We aim to grow from serving individuals to building a platform that reaches every corner of Uttar Pradesh, making quality financial advice accessible to all.</p>
+      </div>
+      <div class="vm-card">
+        <span class="vm-icon">🎯</span>
+        <div class="vm-title">Our Mission</div>
+        <p class="vm-text">To provide honest, research-backed, and personalised financial guidance to every client — whether they're investing their first ₹500 SIP or building a multi-crore retirement corpus.</p>
+        <p class="vm-text" style="margin-top:16px;">We do this by staying updated with markets, leveraging technology, and always putting our client's interest before our own.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- OUR VALUES -->
+  <section class="section">
+    <div class="section-label"><span>What We Stand For</span></div>
+    <h2>Our Core <em>Values</em></h2>
+    <div class="values-grid">
+      <div class="value-card">
+        <span class="value-icon">🤝</span>
+        <div class="value-title">Trust First</div>
+        <p class="value-text">Every recommendation we make is in your best interest. We disclose commissions, explain risks, and never push products that don't suit your goals.</p>
+      </div>
+      <div class="value-card">
+        <span class="value-icon">🎯</span>
+        <div class="value-title">Goal Driven</div>
+        <p class="value-text">We don't just sell products — we map every investment to a real goal. Child's education, home, retirement — every rupee has a purpose.</p>
+      </div>
+      <div class="value-card">
+        <span class="value-icon">📞</span>
+        <div class="value-title">Always Accessible</div>
+        <p class="value-text">Markets don't wait — and neither do we. Our clients reach us on WhatsApp, phone, or in person whenever they need guidance.</p>
+      </div>
+      <div class="value-card">
+        <span class="value-icon">📊</span>
+        <div class="value-title">Research Backed</div>
+        <p class="value-text">Every recommendation is backed by data, market research, and fundamental analysis — not commissions or shortcuts.</p>
+      </div>
+      <div class="value-card">
+        <span class="value-icon">🌱</span>
+        <div class="value-title">Long Term Thinking</div>
+        <p class="value-text">Wealth is built over years, not days. We help clients stay disciplined during market volatility and focused on their long-term goals.</p>
+      </div>
+      <div class="value-card">
+        <span class="value-icon">💡</span>
+        <div class="value-title">Continuous Learning</div>
+        <p class="value-text">Financial markets evolve. We constantly upgrade our knowledge, tools, and approach — including AI-powered research — to serve you better.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- OUR JOURNEY -->
+  <section class="section journey-section">
+    <div class="section-label"><span>Our Story</span></div>
+    <h2>The AD Investments <em>Journey</em></h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-year">The Beginning</div>
+        <div class="timeline-title">Founded in Lucknow</div>
+        <p class="timeline-text">AD Investments was founded with a single mission — to bring honest and personalised financial guidance to families in Lucknow who deserved better than generic advice from large institutions.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">Early Growth</div>
+        <div class="timeline-title">Building Trust, One Client at a Time</div>
+        <p class="timeline-text">Through word of mouth, referrals, and consistent results, we grew our client base steadily. Every client became a testimony to our commitment to transparency and long-term thinking.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">Expanding Services</div>
+        <div class="timeline-title">From Mutual Funds to 17 Services</div>
+        <p class="timeline-text">We expanded from mutual fund distribution to a full financial supermarket — adding insurance, loans, bonds, NPS, demat services, and more. One firm. Every financial need covered.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">Today & Beyond</div>
+        <div class="timeline-title">Going Digital with AI</div>
+        <p class="timeline-text">We are now embracing technology and AI-powered tools to serve clients faster, smarter, and better. Our goal — to become the most technologically advanced financial advisory firm in Lucknow.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section class="section" style="background:var(--charcoal-2);">
+    <div class="section-label"><span>The People Behind AD Investments</span></div>
+    <h2>Meet Our <em>Team</em></h2>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-avatar">A</div>
+        <div>
+          <div class="team-name">Founder & Lead Advisor</div>
+          <div class="team-role">AMFI Registered — ARN 131924</div>
+          <p class="team-bio">With 2+ years in financial distribution, our founder has guided 50+ families across Lucknow in building wealth through mutual funds, insurance, and goal-based investing.</p>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">AD</div>
+        <div>
+          <div class="team-name">Technology & Growth</div>
+          <div class="team-role">AI & Digital Strategy</div>
+          <p class="team-bio">Leading the firm's digital transformation — building AI-powered tools, digital presence, and systems to help AD Investments scale and serve clients better.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="section-label" style="justify-content:center;"><span>Get Started</span></div>
+    <h2>Ready to Start Your <em>Financial Journey?</em></h2>
+    <p>Book a free consultation with us. No commitments. Just honest advice.</p>
+    <a href="index.html#contact" class="btn-primary">Book Free Consultation</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <img src="https://i.ibb.co/N2tqmM7z/ad-investments-logo.png" alt="AD Investments" style="height:48px;margin-bottom:16px;display:block;"/>
+        <h4 class="footer-h">About Us</h4>
+        <p class="footer-p">AD Investments is a fully dedicated Financial Distribution Company based in Lucknow. Our purpose is to help investors preserve and grow their wealth through disciplined, goal-based financial planning.</p>
+      </div>
+      <div>
+        <h4 class="footer-h">Quick Links</h4>
+        <ul class="footer-ul">
+          <li><a href="index.html">● Home</a></li>
+          <li><a href="about.html">● About Us</a></li>
+          <li><a href="index.html#services">● Services</a></li>
+          <li><a href="index.html#contact">● Contact</a></li>
+          <li><a href="index.html#contact">● Book Consultation</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-h">Our Services</h4>
+        <ul class="footer-ul">
+          <li><a href="mutual-funds.html">● Mutual Funds</a></li>
+          <li><a href="life-insurance.html">● Life Insurance</a></li>
+          <li><a href="health-insurance.html">● Health Insurance</a></li>
+          <li><a href="fixed-deposits.html">● Fixed Deposits</a></li>
+          <li><a href="retirement.html">● Retirement Planning</a></li>
+          <li><a href="home-loan.html">● Home Loan</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-h">Get In Touch</h4>
+        <div class="footer-contact-item"><span>📍</span><span style="font-size:13px;color:var(--white-dim);line-height:1.6;">Lucknow, Uttar Pradesh, India</span></div>
+        <div class="footer-contact-item"><span>✉️</span><a href="mailto:adinvestmentlko@gmail.com">adinvestmentlko@gmail.com</a></div>
+        <div class="footer-contact-item"><span>📞</span><a href="tel:+917379008786">+91 73790 08786</a></div>
+        <div class="footer-contact-item"><span>💬</span><a href="https://wa.me/917379008786" target="_blank">WhatsApp Us</a></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2025 AD Investments. Lucknow, India. All rights reserved.</div>
+      <div class="footer-copy">AMFI Registered Mutual Fund Distributor | ARN-131924 | Validity: 08 Sep 2026</div>
+    </div>
+  </footer>
+
+  <div class="sebi-disclaimer">
+    <p style="max-width:1000px;margin:0 auto 8px;"><strong style="color:rgba(201,168,76,0.5);">Risk Factors —</strong> Investments in Mutual Funds are subject to Market Risks. Read all scheme related documents carefully before investing. Mutual Fund Schemes do not assure or guarantee any returns. Past performances of any Mutual Fund Scheme may or may not be sustained in future. There is no guarantee that the investment objective of any suggested scheme shall be achieved. All existing and prospective investors are advised to check and evaluate the Exit loads and other cost structure (TER) applicable at the time of making the investment before finalizing on any investment decision for Mutual Funds schemes. We deal in Regular Plans only for Mutual Fund Schemes and earn a Trailing Commission on client investments. Disclosure for commission earnings is made to clients at the time of investments. Option of Direct Plan for every Mutual Fund Scheme is available to investors offering advantage of lower expense ratio. We are not entitled to earn any commission on Direct plans. Hence we do not deal in Direct Plans.</p>
+    <p style="margin-top:8px;">
+      <a href="https://www.sebi.gov.in" target="_blank">SEBI</a> &nbsp;|&nbsp;
+      <a href="https://www.amfiindia.com" target="_blank">AMFI</a> &nbsp;|&nbsp;
+      <a href="https://www.sebi.gov.in/filings/mutual-funds.html" target="_blank">SID/SAI/KIM</a>
+    </p>
+  </div>
+
+</body>
+</html>
