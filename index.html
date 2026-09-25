@@ -4,15 +4,115 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>AD Investments — Create Your Financial Future</title>
+  <meta name="description" content="AD Investments, Lucknow. AMFI-registered mutual fund distributor (ARN-331443). Mutual funds, SIPs, insurance, fixed deposits, bonds and goal-based planning for Lucknow families."/>
+  <meta name="theme-color" content="#0E0E0E"/>
+
+  <!-- Favicon / site icon -->
+  <link rel="icon" type="image/png" href="https://i.ibb.co/N2tqmM7z/ad-investments-logo.png"/>
+  <link rel="shortcut icon" type="image/png" href="https://i.ibb.co/N2tqmM7z/ad-investments-logo.png"/>
+  <link rel="apple-touch-icon" href="https://i.ibb.co/N2tqmM7z/ad-investments-logo.png"/>
+
+  <!-- Link preview (WhatsApp / social) -->
+  <meta property="og:title" content="AD Investments - Create Your Financial Future"/>
+  <meta property="og:description" content="AMFI-registered mutual fund distributor in Lucknow. Start an SIP, plan your child's education, and invest with someone who picks up the phone."/>
+  <meta property="og:image" content="https://i.ibb.co/N2tqmM7z/ad-investments-logo.png"/>
+  <meta property="og:url" content="https://www.adinvestments.in/"/>
+  <meta property="og:type" content="website"/>
+
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="assets/style.css"/>
+
+  <!-- Calculator styles (self-contained; no edits needed in assets/style.css) -->
+  <style>
+    .calc-section{--cg:#C9A84C;--cw:#F5F2EC;--cdim:rgba(245,242,236,0.6);--cline:rgba(201,168,76,0.18);}
+    .calc-section .calc-intro{max-width:62ch;margin:14px auto 0;text-align:center;font-size:15px;line-height:1.8;color:var(--cdim);}
+    .calc-shell{max-width:1120px;margin:44px auto 0;}
+
+    .calc-tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:28px;}
+    .calc-tab{font-family:'DM Sans',sans-serif;font-size:14px;letter-spacing:.02em;color:var(--cdim);
+      background:transparent;border:1px solid var(--cline);border-radius:2px;padding:12px 26px;cursor:pointer;
+      transition:color .2s,border-color .2s,background .2s;}
+    .calc-tab:hover{color:var(--cw);border-color:rgba(201,168,76,.45);}
+    .calc-tab.is-active{color:#0E0E0E;background:var(--cg);border-color:var(--cg);font-weight:500;}
+    .calc-tab:focus-visible,.calc-cta:focus-visible,.calc-range:focus-visible,.calc-input-wrap input:focus-visible{outline:2px solid var(--cg);outline-offset:3px;}
+
+    .calc-panel{display:none;}
+    .calc-panel.is-active{display:block;}
+    .calc-body{display:grid;grid-template-columns:1.15fr .85fr;gap:28px;align-items:start;}
+
+    .calc-controls{background:rgba(255,255,255,0.02);border:1px solid var(--cline);border-radius:3px;padding:30px;
+      display:flex;flex-direction:column;gap:26px;}
+    .calc-field{display:flex;flex-direction:column;gap:10px;}
+    .calc-field label{font-family:'DM Sans',sans-serif;font-size:13px;color:var(--cdim);letter-spacing:.02em;}
+    .calc-input-wrap{display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--cline);padding-bottom:8px;}
+    .calc-prefix,.calc-suffix{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--cg);}
+    .calc-suffix{font-size:14px;font-family:'DM Sans',sans-serif;color:var(--cdim);}
+    .calc-input-wrap input{flex:1;width:100%;background:transparent;border:0;color:var(--cw);
+      font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;letter-spacing:.01em;padding:0;}
+    .calc-input-wrap input:focus{outline:none;}
+    .calc-input-wrap input::-webkit-outer-spin-button,.calc-input-wrap input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}
+    .calc-input-wrap input[type=number]{-moz-appearance:textfield;}
+    .calc-hint{font-size:11.5px;line-height:1.6;color:rgba(245,242,236,0.38);}
+
+    .calc-range{-webkit-appearance:none;appearance:none;width:100%;height:2px;background:rgba(201,168,76,0.22);
+      border-radius:2px;cursor:pointer;margin:2px 0 0;}
+    .calc-range::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;
+      background:var(--cg);border:3px solid #0E0E0E;box-shadow:0 0 0 1px var(--cg);cursor:pointer;}
+    .calc-range::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:var(--cg);
+      border:3px solid #0E0E0E;box-shadow:0 0 0 1px var(--cg);cursor:pointer;}
+
+    .calc-result{background:linear-gradient(160deg,rgba(201,168,76,0.09),rgba(201,168,76,0.02));
+      border:1px solid rgba(201,168,76,0.28);border-radius:3px;padding:32px 28px;position:sticky;top:96px;}
+    .calc-result-label{display:block;font-family:'DM Sans',sans-serif;font-size:12.5px;color:var(--cdim);letter-spacing:.03em;}
+    .calc-result-big{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,5vw,46px);font-weight:700;
+      color:var(--cg);line-height:1.15;margin:8px 0 4px;word-break:break-word;}
+    .calc-result-sub{display:block;font-size:13px;color:var(--cdim);margin-bottom:6px;}
+
+    .calc-split{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px;}
+    .calc-split-label{display:block;font-size:11.5px;color:rgba(245,242,236,0.45);margin-bottom:5px;}
+    .calc-split-value{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600;color:var(--cw);}
+    .calc-gain{color:var(--cg);}
+
+    .calc-bar{display:flex;height:5px;border-radius:3px;overflow:hidden;background:var(--cg);margin-top:18px;}
+    .calc-bar-invested{display:block;height:100%;background:rgba(245,242,236,0.55);transition:width .25s ease;}
+    .calc-bar-key{display:flex;gap:18px;margin-top:9px;font-size:11px;color:rgba(245,242,236,0.45);}
+    .key-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;}
+    .key-invested{background:rgba(245,242,236,0.55);}
+    .key-growth{background:var(--cg);}
+
+    .calc-rows{margin-top:22px;display:flex;flex-direction:column;}
+    .calc-row{display:flex;justify-content:space-between;align-items:baseline;gap:14px;
+      padding:11px 0;border-bottom:1px solid rgba(201,168,76,0.12);font-size:13px;color:var(--cdim);}
+    .calc-row:last-child{border-bottom:0;}
+    .calc-row strong{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:600;color:var(--cw);white-space:nowrap;}
+    .calc-row-hero strong{color:var(--cg);font-size:22px;}
+    .calc-note{margin-top:14px;font-size:12px;line-height:1.7;color:rgba(245,242,236,0.45);}
+
+    .calc-cta{display:block;text-align:center;margin-top:24px;padding:14px 20px;background:var(--cg);color:#0E0E0E;
+      font-family:'DM Sans',sans-serif;font-size:13.5px;font-weight:500;letter-spacing:.02em;
+      text-decoration:none;border-radius:2px;transition:opacity .2s;}
+    .calc-cta:hover{opacity:.85;}
+
+    .calc-disclaimer{max-width:900px;margin:30px auto 0;text-align:center;font-size:11.5px;line-height:1.85;
+      color:rgba(245,242,236,0.32);}
+
+    @media (max-width:900px){
+      .calc-body{grid-template-columns:1fr;}
+      .calc-result{position:static;}
+      .calc-controls{padding:24px 20px;}
+    }
+    @media (prefers-reduced-motion:reduce){
+      .calc-tab,.calc-cta,.calc-bar-invested{transition:none;}
+    }
+  </style>
+
 </head>
 <body>
 
   <div class="cursor" id="cursor"></div>
   <div class="cursor-follower" id="follower"></div>
 
-  <a class="whatsapp-float" href="https://wa.me/919335459707?text=Hi%2C%20I%20would%20like%20to%20consult%20about%20my%20finances." target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
+  <a class="whatsapp-float" href="https://wa.me/917379008786?text=Hi%2C%20I%20would%20like%20to%20consult%20about%20my%20finances." target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
     <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M16.004 3C9.377 3 4 8.373 4 15c0 2.386.7 4.607 1.908 6.474L4 29l7.73-1.865A11.94 11.94 0 0 0 16.004 27C22.63 27 28 21.627 28 15S22.63 3 16.004 3Zm0 21.818c-1.98 0-3.86-.55-5.47-1.523l-.392-.233-4.59 1.107 1.128-4.47-.257-.406A9.77 9.77 0 0 1 5.182 15c0-5.964 4.858-10.818 10.822-10.818S26.818 9.036 26.818 15 21.968 24.818 16.004 24.818Zm5.98-8.145c-.327-.164-1.93-.953-2.23-1.062-.3-.109-.518-.164-.737.164-.218.327-.845 1.062-1.036 1.28-.19.218-.382.245-.71.082-.327-.164-1.382-.51-2.633-1.626-.973-.868-1.63-1.94-1.82-2.267-.19-.327-.02-.504.144-.667.148-.148.327-.382.49-.573.164-.19.218-.327.327-.545.109-.218.055-.41-.027-.573-.082-.164-.737-1.775-1.01-2.43-.266-.64-.537-.553-.737-.563l-.628-.011c-.218 0-.573.082-.873.41-.3.327-1.145 1.12-1.145 2.73 0 1.611 1.173 3.167 1.336 3.386.164.218 2.308 3.525 5.593 4.943.782.338 1.392.54 1.868.69.785.25 1.5.215 2.065.13.63-.094 1.93-.79 2.202-1.552.273-.763.273-1.417.19-1.553-.082-.136-.3-.218-.627-.382Z"/></svg>
   </a>
 
@@ -52,7 +152,7 @@
           <div class="dropdown-section">
             <span class="dropdown-label">Planning</span>
             <a href="retirement.html">Retirement Planning</a>
-            <a href="stock-advisory.html">Stock Advisory</a>
+            <a href="#calculators">SIP &amp; Goal Calculators</a>
           </div>
           <div class="dropdown-section">
             <span class="dropdown-label">Banking</span>
@@ -100,7 +200,7 @@
       <div class="mobile-menu-services-group">
         <span class="mobile-menu-services-label">Planning</span>
         <a href="retirement.html">Retirement Planning</a>
-        <a href="stock-advisory.html">Stock Advisory</a>
+        <a href="#calculators">SIP &amp; Goal Calculators</a>
       </div>
       <div class="mobile-menu-services-group">
         <span class="mobile-menu-services-label">Banking</span>
@@ -122,7 +222,7 @@
         <span>Lucknow's Trusted Financial Partner</span>
       </div>
       <h1>Create Your <em>Financial</em> Future With Us</h1>
-      <p class="hero-sub">Expert guidance in stock advisory and mutual funds — helping families in Lucknow build lasting wealth through disciplined, personalised investing.</p>
+      <p class="hero-sub">Mutual funds, insurance and goal-based planning for families in Lucknow. AMFI-registered, commission-transparent, and always a phone call away.</p>
       <div class="hero-actions">
         <a href="#contact" class="btn-primary">Start Investing</a>
         <a href="#services" class="btn-secondary">
@@ -141,8 +241,8 @@
         <div class="stat-label">Financial Services</div>
       </div>
       <div class="stat-card">
-        <div class="stat-number">2+</div>
-        <div class="stat-label">Years of Service</div>
+        <div class="stat-number">&#8377;5 Cr+</div>
+        <div class="stat-label">Assets Under Management</div>
       </div>
     </div>
   </section>
@@ -150,18 +250,22 @@
   <!-- MARQUEE -->
   <div class="marquee-wrap">
     <div class="marquee-track">
-      <div class="marquee-item"><span>◆</span> Stock Advisory</div>
       <div class="marquee-item"><span>◆</span> Mutual Funds</div>
-      <div class="marquee-item"><span>◆</span> Wealth Planning</div>
-      <div class="marquee-item"><span>◆</span> Portfolio Management</div>
-      <div class="marquee-item"><span>◆</span> SIP Advisory</div>
-      <div class="marquee-item"><span>◆</span> Market Research</div>
-      <div class="marquee-item"><span>◆</span> Stock Advisory</div>
+      <div class="marquee-item"><span>◆</span> SIP Planning</div>
+      <div class="marquee-item"><span>◆</span> Child Education Planning</div>
+      <div class="marquee-item"><span>◆</span> Retirement Planning</div>
+      <div class="marquee-item"><span>◆</span> Fixed Deposits</div>
+      <div class="marquee-item"><span>◆</span> Insurance</div>
+      <div class="marquee-item"><span>◆</span> NPS</div>
+      <div class="marquee-item"><span>◆</span> Tax Saving (ELSS)</div>
       <div class="marquee-item"><span>◆</span> Mutual Funds</div>
-      <div class="marquee-item"><span>◆</span> Wealth Planning</div>
-      <div class="marquee-item"><span>◆</span> Portfolio Management</div>
-      <div class="marquee-item"><span>◆</span> SIP Advisory</div>
-      <div class="marquee-item"><span>◆</span> Market Research</div>
+      <div class="marquee-item"><span>◆</span> SIP Planning</div>
+      <div class="marquee-item"><span>◆</span> Child Education Planning</div>
+      <div class="marquee-item"><span>◆</span> Retirement Planning</div>
+      <div class="marquee-item"><span>◆</span> Fixed Deposits</div>
+      <div class="marquee-item"><span>◆</span> Insurance</div>
+      <div class="marquee-item"><span>◆</span> NPS</div>
+      <div class="marquee-item"><span>◆</span> Tax Saving (ELSS)</div>
     </div>
   </div>
 
@@ -172,10 +276,10 @@
     </div>
     <h2 class="reveal">Services Built For <em style="font-style:italic;color:var(--gold)">Your</em> Goals</h2>
     <div class="services-grid">
-      <a href="stock-advisory.html" class="service-card reveal">
-        <div class="service-icon">📈</div>
-        <div class="service-title">Stock Advisory</div>
-        <p class="service-desc">Research-backed stock recommendations tailored to your risk appetite. We analyse fundamentals, technicals, and market trends so you don't have to.</p>
+      <a href="life-insurance.html" class="service-card reveal">
+        <div class="service-icon">🛡️</div>
+        <div class="service-title">Life &amp; Health Insurance</div>
+        <p class="service-desc">Protect your family before you grow your money. Term cover, health cover and the right sum assured for your income and dependants.</p>
         <div class="service-arrow">→</div>
       </a>
       <a href="mutual-funds.html" class="service-card reveal">
@@ -193,7 +297,7 @@
       <a href="demat.html" class="service-card reveal">
         <div class="service-icon">📊</div>
         <div class="service-title">Demat Services</div>
-        <p class="service-desc">Open and manage your Demat account seamlessly. Start investing in stocks and securities with expert guidance.</p>
+        <p class="service-desc">Open and manage your Demat account seamlessly, so your mutual funds, bonds and securities sit in one place.</p>
         <div class="service-arrow">→</div>
       </a>
       <a href="retirement.html" class="service-card reveal">
@@ -215,6 +319,187 @@
     </div>
   </section>
 
+  <!-- CALCULATORS -->
+  <section class="section calc-section" id="calculators">
+    <div class="section-label reveal">
+      <span>Plan Before You Invest</span>
+    </div>
+    <h2 class="reveal">See What Your Money <em style="font-style:italic;color:var(--gold)">Can Become</em></h2>
+    <p class="calc-intro reveal">Move the sliders. No sign-up, nothing stored. When a number looks right, send it to us on WhatsApp and we'll help you start.</p>
+
+    <div class="calc-shell reveal">
+      <div class="calc-tabs" role="tablist" aria-label="Choose a calculator">
+        <button class="calc-tab is-active" id="tab-sip" role="tab" aria-selected="true" aria-controls="panel-sip" type="button">SIP Calculator</button>
+        <button class="calc-tab" id="tab-edu" role="tab" aria-selected="false" aria-controls="panel-edu" type="button">College Fund Calculator</button>
+      </div>
+
+      <!-- SIP PANEL -->
+      <div class="calc-panel is-active" id="panel-sip" role="tabpanel" aria-labelledby="tab-sip">
+        <div class="calc-body">
+          <div class="calc-controls">
+            <div class="calc-field">
+              <label for="sipAmount">Monthly investment</label>
+              <div class="calc-input-wrap">
+                <span class="calc-prefix">&#8377;</span>
+                <input type="number" id="sipAmount" value="5000" min="500" max="500000" step="500" inputmode="numeric"/>
+              </div>
+              <input type="range" class="calc-range" id="sipAmountR" value="5000" min="500" max="200000" step="500" aria-label="Monthly investment slider"/>
+            </div>
+
+            <div class="calc-field">
+              <label for="sipYears">Investment period</label>
+              <div class="calc-input-wrap">
+                <input type="number" id="sipYears" value="15" min="1" max="40" step="1" inputmode="numeric"/>
+                <span class="calc-suffix">years</span>
+              </div>
+              <input type="range" class="calc-range" id="sipYearsR" value="15" min="1" max="40" step="1" aria-label="Investment period slider"/>
+            </div>
+
+            <div class="calc-field">
+              <label for="sipRate">Expected return (per year)</label>
+              <div class="calc-input-wrap">
+                <input type="number" id="sipRate" value="12" min="1" max="25" step="0.5" inputmode="decimal"/>
+                <span class="calc-suffix">%</span>
+              </div>
+              <input type="range" class="calc-range" id="sipRateR" value="12" min="1" max="25" step="0.5" aria-label="Expected return slider"/>
+              <span class="calc-hint">Equity funds have historically delivered around 10&ndash;14% over long periods. Returns are not guaranteed.</span>
+            </div>
+
+            <div class="calc-field">
+              <label for="sipStep">Annual step-up (optional)</label>
+              <div class="calc-input-wrap">
+                <input type="number" id="sipStep" value="0" min="0" max="25" step="1" inputmode="numeric"/>
+                <span class="calc-suffix">%</span>
+              </div>
+              <input type="range" class="calc-range" id="sipStepR" value="0" min="0" max="25" step="1" aria-label="Annual step-up slider"/>
+              <span class="calc-hint">Increase your SIP every year as your salary grows.</span>
+            </div>
+          </div>
+
+          <div class="calc-result" aria-live="polite">
+            <span class="calc-result-label">Estimated value after <strong id="sipYearsEcho">15</strong> years</span>
+            <div class="calc-result-big" id="sipTotal">&#8377;0</div>
+            <div class="calc-split">
+              <div>
+                <span class="calc-split-label">You invest</span>
+                <span class="calc-split-value" id="sipInvested">&#8377;0</span>
+              </div>
+              <div>
+                <span class="calc-split-label">Estimated growth</span>
+                <span class="calc-split-value calc-gain" id="sipGain">&#8377;0</span>
+              </div>
+            </div>
+            <div class="calc-bar" aria-hidden="true">
+              <span class="calc-bar-invested" id="sipBar" style="width:50%"></span>
+            </div>
+            <div class="calc-bar-key" aria-hidden="true">
+              <span><i class="key-dot key-invested"></i> Invested</span>
+              <span><i class="key-dot key-growth"></i> Growth</span>
+            </div>
+            <a class="calc-cta" id="sipWa" href="#" target="_blank" rel="noopener">Start this SIP on WhatsApp</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- EDUCATION PANEL -->
+      <div class="calc-panel" id="panel-edu" role="tabpanel" aria-labelledby="tab-edu" hidden>
+        <div class="calc-body">
+          <div class="calc-controls">
+            <div class="calc-field">
+              <label for="eduAge">Your child's age today</label>
+              <div class="calc-input-wrap">
+                <input type="number" id="eduAge" value="5" min="0" max="17" step="1" inputmode="numeric"/>
+                <span class="calc-suffix">years</span>
+              </div>
+              <input type="range" class="calc-range" id="eduAgeR" value="5" min="0" max="17" step="1" aria-label="Child's age slider"/>
+            </div>
+
+            <div class="calc-field">
+              <label for="eduStart">Age when college starts</label>
+              <div class="calc-input-wrap">
+                <input type="number" id="eduStart" value="18" min="16" max="25" step="1" inputmode="numeric"/>
+                <span class="calc-suffix">years</span>
+              </div>
+              <input type="range" class="calc-range" id="eduStartR" value="18" min="16" max="25" step="1" aria-label="College start age slider"/>
+            </div>
+
+            <div class="calc-field">
+              <label for="eduCost">Cost of that course today</label>
+              <div class="calc-input-wrap">
+                <span class="calc-prefix">&#8377;</span>
+                <input type="number" id="eduCost" value="1500000" min="100000" max="50000000" step="50000" inputmode="numeric"/>
+              </div>
+              <input type="range" class="calc-range" id="eduCostR" value="1500000" min="100000" max="10000000" step="50000" aria-label="Current course cost slider"/>
+              <span class="calc-hint">Full course fee, not per year. An engineering degree in India today runs roughly &#8377;8&ndash;20 lakh.</span>
+            </div>
+
+            <div class="calc-field">
+              <label for="eduInfl">Education inflation</label>
+              <div class="calc-input-wrap">
+                <input type="number" id="eduInfl" value="8" min="0" max="15" step="0.5" inputmode="decimal"/>
+                <span class="calc-suffix">%</span>
+              </div>
+              <input type="range" class="calc-range" id="eduInflR" value="8" min="0" max="15" step="0.5" aria-label="Education inflation slider"/>
+              <span class="calc-hint">College fees have typically risen faster than everyday prices.</span>
+            </div>
+
+            <div class="calc-field">
+              <label for="eduRate">Expected return on investments</label>
+              <div class="calc-input-wrap">
+                <input type="number" id="eduRate" value="12" min="1" max="20" step="0.5" inputmode="decimal"/>
+                <span class="calc-suffix">%</span>
+              </div>
+              <input type="range" class="calc-range" id="eduRateR" value="12" min="1" max="20" step="0.5" aria-label="Expected return slider"/>
+            </div>
+
+            <div class="calc-field">
+              <label for="eduSaved">Already saved for this goal</label>
+              <div class="calc-input-wrap">
+                <span class="calc-prefix">&#8377;</span>
+                <input type="number" id="eduSaved" value="0" min="0" max="50000000" step="25000" inputmode="numeric"/>
+              </div>
+              <input type="range" class="calc-range" id="eduSavedR" value="0" min="0" max="5000000" step="25000" aria-label="Existing savings slider"/>
+            </div>
+          </div>
+
+          <div class="calc-result" aria-live="polite">
+            <span class="calc-result-label">Start an SIP of</span>
+            <div class="calc-result-big" id="eduSip">&#8377;0</div>
+            <span class="calc-result-sub" id="eduSipSub">per month for 13 years</span>
+
+            <div class="calc-rows">
+              <div class="calc-row">
+                <span>Cost of the course today</span>
+                <strong id="eduToday">&#8377;0</strong>
+              </div>
+              <div class="calc-row calc-row-hero">
+                <span>What it will cost in <b id="eduYearsEcho">13</b> years</span>
+                <strong id="eduFuture">&#8377;0</strong>
+              </div>
+              <div class="calc-row">
+                <span>Your savings will grow to</span>
+                <strong id="eduExisting">&#8377;0</strong>
+              </div>
+              <div class="calc-row">
+                <span>Still to be funded</span>
+                <strong id="eduGap">&#8377;0</strong>
+              </div>
+            </div>
+
+            <p class="calc-note" id="eduNote"></p>
+            <a class="calc-cta" id="eduWa" href="#" target="_blank" rel="noopener">Plan this goal on WhatsApp</a>
+          </div>
+        </div>
+      </div>
+
+      <p class="calc-disclaimer">
+        These calculators are illustrations, not promises. They assume a steady rate of return, which real markets never deliver.
+        Actual results will differ and mutual fund investments carry market risk. Nothing here is investment advice or a recommendation
+        of any scheme &mdash; read all scheme related documents carefully before investing.
+      </p>
+    </div>
+  </section>
+
   <!-- WHY US -->
   <section class="section why-section" id="why">
     <div class="why-grid">
@@ -223,20 +508,20 @@
           <span>Why AD Investments</span>
         </div>
         <h2>Trusted by Families <em style="font-style:italic;color:var(--gold)">Across Lucknow</em></h2>
-        <p>We're not a faceless corporation. We're a local firm that understands the aspirations of Lucknow's salaried families — and we've been guiding them for over a decade.</p>
+        <p>We're not a faceless corporation. We're a Lucknow firm that understands how salaried families here actually save — and we've grown to over ₹5 crore under management entirely through client referrals.</p>
         <div class="why-points">
           <div class="why-point">
             <div class="why-num">01</div>
             <div class="why-text">
-              <strong>Personalised Advice</strong>
-              <span>No generic recommendations. Every plan is built around your specific income, goals, and risk tolerance.</span>
+              <strong>Personalised Guidance</strong>
+              <span>No copy-paste plans. Every portfolio is built around your income, your goals and how much risk you can actually sleep through.</span>
             </div>
           </div>
           <div class="why-point">
             <div class="why-num">02</div>
             <div class="why-text">
               <strong>Transparent Process</strong>
-              <span>You always know where your money is, how it's performing, and what we're doing with it.</span>
+              <span>You always know where your money is, how it's performing, and exactly what we earn as commission on it.</span>
             </div>
           </div>
           <div class="why-point">
@@ -250,7 +535,7 @@
       </div>
       <div class="why-right reveal">
         <div class="why-visual">
-          <p class="testimonial-text">"AD Investments helped me start my first SIP 6 years ago. Today my portfolio has grown beyond what I ever imagined. They feel like family."</p>
+          <p class="testimonial-text">"I kept putting off investing because it felt complicated. AD Investments sat with me, explained every fund in plain Hindi, and set up my first SIP the same week. I have never felt talked down to."</p>
           <div class="testimonial-author">
             <div class="author-avatar">R</div>
             <div>
@@ -310,8 +595,7 @@
           <div class="form-group">
             <label>Interested In</label>
             <select id="finterest">
-              <option>Stock Advisory</option>
-              <option>Mutual Funds</option>
+              <option>Mutual Funds / SIP</option>
               <option>Fixed Deposits</option>
               <option>Demat Services</option>
               <option>NCD/RBI Bonds</option>
@@ -328,7 +612,7 @@
               <option>Retirement Planning</option>
               <option>HDFC Bank Saving Account</option>
               <option>HDFC Credit Card</option>
-              <option>Portfolio Review</option>
+              <option>SIP Review</option>
               <option>Goal-Based Planning</option>
               <option>Other</option>
             </select>
@@ -357,6 +641,7 @@
           <li><a href="index.html" style="color:var(--white-dim);text-decoration:none;font-size:13px;" onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='rgba(245,242,236,0.6)'">● Home</a></li>
           <li><a href="services.html" style="color:var(--white-dim);text-decoration:none;font-size:13px;" onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='rgba(245,242,236,0.6)'">● Services</a></li>
           <li><a href="about.html" style="color:var(--white-dim);text-decoration:none;font-size:13px;" onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='rgba(245,242,236,0.6)'">● About Us</a></li>
+          <li><a href="#calculators" style="color:var(--white-dim);text-decoration:none;font-size:13px;" onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='rgba(245,242,236,0.6)'">● Calculators</a></li>
           <li><a href="#contact" style="color:var(--white-dim);text-decoration:none;font-size:13px;" onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='rgba(245,242,236,0.6)'">● Contact</a></li>
           <li><a href="#contact" style="color:var(--white-dim);text-decoration:none;font-size:13px;" onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='rgba(245,242,236,0.6)'">● Book Consultation</a></li>
         </ul>
@@ -376,15 +661,15 @@
         <h4 style="font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:400;color:var(--white);margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid var(--gold);display:inline-block;">Get In Touch</h4>
         <ul style="list-style:none;margin-top:12px;display:flex;flex-direction:column;gap:14px;">
           <li style="display:flex;gap:10px;align-items:flex-start;"><span style="color:var(--gold);">📍</span><span style="font-size:13px;color:var(--white-dim);line-height:1.6;">Lucknow, Uttar Pradesh, India</span></li>
-          <li style="display:flex;gap:10px;align-items:center;"><span style="color:var(--gold);">✉️</span><a href="/cdn-cgi/l/email-protection#afcecbc6c1d9cadcdbc2cac1dbc3c4c0efc8c2cec6c381ccc0c2" style="font-size:13px;color:var(--white-dim);text-decoration:none;" onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='rgba(245,242,236,0.6)'"><span class="__cf_email__" data-cfemail="69080d00071f0c1a1d040c071d050206290e04080005470a0604">[email&#160;protected]</span></a></li>
+          <li style="display:flex;gap:10px;align-items:center;"><span style="color:var(--gold);">✉️</span><a href="mailto:adinvestmentlko@gmail.com" style="font-size:13px;color:var(--white-dim);text-decoration:none;" onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='rgba(245,242,236,0.6)'">adinvestmentlko@gmail.com</a></li>
           <li style="display:flex;gap:10px;align-items:center;"><span style="color:var(--gold);">📞</span><a href="tel:+917379008786" style="font-size:13px;color:var(--white-dim);text-decoration:none;" onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='rgba(245,242,236,0.6)'">+91 73790 08786</a></li>
           <li style="display:flex;gap:10px;align-items:center;"><span style="color:var(--gold);">💬</span><a href="https://wa.me/917379008786" target="_blank" style="font-size:13px;color:var(--white-dim);text-decoration:none;" onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='rgba(245,242,236,0.6)'">WhatsApp Us</a></li>
         </ul>
       </div>
     </div>
     <div style="border-top:1px solid rgba(201,168,76,0.1);padding:20px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
-      <div style="font-size:12px;color:rgba(245,242,236,0.3);">© 2025 AD Investments. Lucknow, India. All rights reserved.</div>
-      <div style="font-size:12px;color:rgba(245,242,236,0.3);">AMFI Registered | ARN-331443 | Validity: 08 Sep 2026</div>
+      <div style="font-size:12px;color:rgba(245,242,236,0.3);">© 2025–2026 AD Investments. Lucknow, India. All rights reserved.</div>
+      <div style="font-size:12px;color:rgba(245,242,236,0.3);">AMFI Registered | ARN-331443 | Valid till 08 Sep 2028</div>
     </div>
   </footer>
 
@@ -399,5 +684,149 @@
   </div>
 
   <script src="assets/main.js"></script>
+
+  <!-- Calculator logic -->
+  <script>
+  (function () {
+    var WA = "917379008786";
+
+    function inr(n) {
+      if (!isFinite(n) || n < 0) n = 0;
+      return "\u20B9" + Math.round(n).toLocaleString("en-IN");
+    }
+    function inrShort(n) {
+      if (!isFinite(n) || n < 0) n = 0;
+      if (n >= 1e7) return "\u20B9" + (n / 1e7).toFixed(2).replace(/\.00$/, "") + " Cr";
+      if (n >= 1e5) return "\u20B9" + (n / 1e5).toFixed(2).replace(/\.00$/, "") + " L";
+      return inr(n);
+    }
+    function $(id) { return document.getElementById(id); }
+    function val(id) { var el = $(id); var v = parseFloat(el && el.value); return isFinite(v) ? v : 0; }
+
+    // Keep a number box and its slider in sync, then recalculate.
+    function link(numId, rangeId, onChange) {
+      var num = $(numId), rng = $(rangeId);
+      if (!num || !rng) return;
+      num.addEventListener("input", function () {
+        var v = parseFloat(num.value);
+        if (isFinite(v)) rng.value = Math.min(Math.max(v, rng.min), rng.max);
+        onChange();
+      });
+      rng.addEventListener("input", function () { num.value = rng.value; onChange(); });
+    }
+
+    /* ---------- SIP ---------- */
+    function calcSip() {
+      var p = val("sipAmount"), yrs = val("sipYears"), rate = val("sipRate"), step = val("sipStep");
+      var i = rate / 100 / 12, fv = 0, invested = 0, monthly = p;
+
+      for (var y = 0; y < yrs; y++) {
+        if (y > 0) monthly = monthly * (1 + step / 100);
+        for (var m = 0; m < 12; m++) {
+          fv = (fv + monthly) * (1 + i);
+          invested += monthly;
+        }
+      }
+
+      $("sipTotal").textContent = inrShort(fv);
+      $("sipTotal").title = inr(fv);
+      $("sipInvested").textContent = inrShort(invested);
+      $("sipGain").textContent = inrShort(fv - invested);
+      $("sipYearsEcho").textContent = yrs;
+      $("sipBar").style.width = (fv > 0 ? Math.min(100, (invested / fv) * 100) : 100) + "%";
+
+      var msg = "Hi, I used the SIP calculator on your site. A monthly SIP of " + inr(p) +
+        " for " + yrs + " years" + (step > 0 ? " with a " + step + "% yearly step-up" : "") +
+        " shows about " + inrShort(fv) + ". I'd like to start this.";
+      $("sipWa").href = "https://wa.me/" + WA + "?text=" + encodeURIComponent(msg);
+    }
+
+    /* ---------- COLLEGE FUND ---------- */
+    function calcEdu() {
+      var age = val("eduAge"), start = val("eduStart");
+      var cost = val("eduCost"), infl = val("eduInfl"), rate = val("eduRate"), saved = val("eduSaved");
+
+      var yrs = Math.max(0, start - age);
+      var future = cost * Math.pow(1 + infl / 100, yrs);
+      var savedGrown = saved * Math.pow(1 + rate / 100, yrs);
+      var gap = Math.max(0, future - savedGrown);
+
+      var i = rate / 100 / 12, n = yrs * 12, sip;
+      if (n <= 0) sip = gap;
+      else if (i === 0) sip = gap / n;
+      else sip = gap * i / ((Math.pow(1 + i, n) - 1) * (1 + i));
+
+      $("eduSip").textContent = inr(sip);
+      $("eduSipSub").textContent = yrs > 0
+        ? "per month for " + yrs + (yrs === 1 ? " year" : " years")
+        : "needed now \u2014 college starts this year";
+      $("eduToday").textContent = inrShort(cost);
+      $("eduFuture").textContent = inrShort(future);
+      $("eduFuture").title = inr(future);
+      $("eduExisting").textContent = inrShort(savedGrown);
+      $("eduGap").textContent = inrShort(gap);
+      $("eduYearsEcho").textContent = yrs;
+
+      var note = "";
+      if (yrs <= 0) {
+        note = "College starts now, so there is no time left to invest. Let's talk about funding it from what you already hold.";
+      } else if (future > cost * 2) {
+        note = "At " + infl + "% education inflation, the same course costs more than double what it does today. Starting early is what makes this affordable.";
+      } else if (gap === 0) {
+        note = "Your existing savings already cover this goal on these assumptions. Worth reviewing whether they are invested for the right timeframe.";
+      } else {
+        note = "Every year you delay raises the monthly amount, because there are fewer months left to compound.";
+      }
+      $("eduNote").textContent = note;
+
+      var msg = "Hi, I used the college fund calculator on your site. My child is " + age +
+        ", college starts at " + start + ", and the course costs " + inrShort(cost) +
+        " today. It suggests an SIP of " + inr(sip) + " per month. I'd like to plan this.";
+      $("eduWa").href = "https://wa.me/" + WA + "?text=" + encodeURIComponent(msg);
+    }
+
+    /* ---------- Tabs ---------- */
+    function showTab(which) {
+      var isSip = which === "sip";
+      $("tab-sip").classList.toggle("is-active", isSip);
+      $("tab-edu").classList.toggle("is-active", !isSip);
+      $("tab-sip").setAttribute("aria-selected", isSip);
+      $("tab-edu").setAttribute("aria-selected", !isSip);
+      $("panel-sip").classList.toggle("is-active", isSip);
+      $("panel-edu").classList.toggle("is-active", !isSip);
+      $("panel-sip").hidden = !isSip;
+      $("panel-edu").hidden = isSip;
+    }
+
+    function init() {
+      if (!$("sipAmount")) return;
+
+      link("sipAmount", "sipAmountR", calcSip);
+      link("sipYears", "sipYearsR", calcSip);
+      link("sipRate", "sipRateR", calcSip);
+      link("sipStep", "sipStepR", calcSip);
+
+      link("eduAge", "eduAgeR", calcEdu);
+      link("eduStart", "eduStartR", calcEdu);
+      link("eduCost", "eduCostR", calcEdu);
+      link("eduInfl", "eduInflR", calcEdu);
+      link("eduRate", "eduRateR", calcEdu);
+      link("eduSaved", "eduSavedR", calcEdu);
+
+      $("tab-sip").addEventListener("click", function () { showTab("sip"); });
+      $("tab-edu").addEventListener("click", function () { showTab("edu"); });
+
+      calcSip();
+      calcEdu();
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", init);
+    } else {
+      init();
+    }
+  })();
+  </script>
+
 </body>
 </html>
